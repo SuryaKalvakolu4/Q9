@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz App</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .question {
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>360 Degree Room Quiz</h1>
+    <div id="question"></div>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">SUBMIT</button>
+    <script>
+        // Function to clear the quiz score from local storage
+function clearQuizScore() {
+    localStorage.removeItem("score9");
+}
+
+// Function to clear local storage when the tab is closed or refreshed
+window.addEventListener('beforeunload', function() {
+    clearQuizScore();
+});
+
+// Rest of your existing code...
+
+        // Quiz questions and answers
+        const quiz = [
+            {
+                question: "What are the special features of the blue windows installed in the Tiefengruben waterworks?",
+                options: ["Ultraviolet light entry prevention", "Preventing the growth of algae on damp walls", "Avoidance of structural damage"],
+                answer: 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score9 = 0;
+
+        // Function to display current question
+        function displayQuestion() {
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+            const current = quiz[currentQuestion];
+
+            questionElement.textContent = current.question;
+            optionsElement.innerHTML = "";
+
+            // Loop through options and create radio buttons
+            for (let i = 0; i < current.options.length; i++) {
+                const option = document.createElement("input");
+                option.type = "radio";
+                option.name = "option";
+                option.value = i;
+
+                const label = document.createElement("label");
+                label.textContent = current.options[i];
+
+                optionsElement.appendChild(option);
+                optionsElement.appendChild(label);
+                optionsElement.appendChild(document.createElement("br"));
+            }
+        }
+
+        // Function to check the answer and update score
+        function checkAnswer() {
+    const options = document.getElementsByName("option");
+    let selectedOption = -1;
+    let isAnswered = false;
+
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
+            selectedOption = parseInt(options[i].value);
+            isAnswered = true;
+            break;
+        }
+    }
+
+    if (!isAnswered || selectedOption !== quiz[currentQuestion].answer) {
+        score9 = 0; // Assign zero score if question is not attempted or answered incorrectly
+    } else {
+        score9++; // Increment score for correct answer
+    }
+}
+
+        // Function to move to the next question
+        function nextQuestion() {
+            checkAnswer();
+            currentQuestion++;
+
+            if (currentQuestion === quiz.length) {
+                // All questions answered, store score in local storage
+                localStorage.setItem("score9", score9);
+                alert("Quiz completed. Your score is " + score9);
+            } else {
+                displayQuestion();
+            }
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>
