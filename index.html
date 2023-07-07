@@ -41,8 +41,10 @@ window.addEventListener('beforeunload', function() {
     clearQuizScore();
 });
 
-// Rest of your existing code...
-
+// Function to start the timer for clearing the score after 20 minutes
+        function startTimer() {
+            setTimeout(clearQuizScore, 20 * 60 * 1000); // 20 minutes in milliseconds
+        }
         // Quiz questions and answers
         const quiz = [
             {
@@ -78,6 +80,8 @@ window.addEventListener('beforeunload', function() {
                 optionsElement.appendChild(label);
                 optionsElement.appendChild(document.createElement("br"));
             }
+
+            startTimer(); // Start the timer after displaying the question
         }
 
         // Function to check the answer and update score
