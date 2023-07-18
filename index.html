@@ -26,14 +26,14 @@
     </style>
 </head>
 <body>
-    <h1>Station 16</h1>
+    <h1>Open Rapid Filter</h1>
     <div id="question"></div>
     <div id="options"></div>
-    <button onclick="nextQuestion()">SUBMIT</button>
+    <button onclick="nextQuestion()">Submit</button>
     <script>
         // Function to clear the quiz score from local storage
 function clearQuizScore() {
-    localStorage.removeItem("Station_16_Score");
+    localStorage.removeItem("Open_Rapid_Filter");
 }
 
 // Function to clear local storage when the tab is closed or refreshed
@@ -49,13 +49,13 @@ window.addEventListener('beforeunload', function() {
         const quiz = [
             {
                 question: "What are the special features of the blue windows installed in the Tiefengruben waterworks?",
-                options: ["Ultraviolet light entry prevention", "Preventing the growth of algae on damp walls", "Avoidance of structural damage"],
+                options: ["Ultraviolet Light Entry Prevention", "Preventing the Growth of Algae on Damp Walls", "Avoidance of Structural Damage"],
                 answer: 0
             }
         ];
 
         let currentQuestion = 0;
-        let Station_16_Score = 0;
+        let Open_Rapid_Filter = 0;
 
         // Function to display current question
         function displayQuestion() {
@@ -99,9 +99,9 @@ window.addEventListener('beforeunload', function() {
     }
 
     if (!isAnswered || selectedOption !== quiz[currentQuestion].answer) {
-        Station_16_Score = 0; // Assign zero score if question is not attempted or answered incorrectly
+        Open_Rapid_Filter = 0; // Assign zero score if question is not attempted or answered incorrectly
     } else {
-        Station_16_Score++; // Increment score for correct answer
+        Open_Rapid_Filter++; // Increment score for correct answer
     }
 }
 
@@ -112,8 +112,8 @@ window.addEventListener('beforeunload', function() {
 
             if (currentQuestion === quiz.length) {
                 // All questions answered, store score in local storage
-                localStorage.setItem("Station_16_Score", Station_16_Score);
-                alert("Quiz completed. Your score is " + Station_16_Score);
+                localStorage.setItem("Open_Rapid_Filter", Open_Rapid_Filter);
+                alert("Quiz completed. Your score is " + Open_Rapid_Filter);
             } else {
                 displayQuestion();
             }
